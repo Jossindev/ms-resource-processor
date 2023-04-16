@@ -17,3 +17,11 @@ server:
 
 queue:
   processing-queue: PROCESSING_QUEUE
+
+service:
+  resource.endpoint: http://localhost:8080
+  song.endpoint: http://localhost:8082
+
+feign:
+  retryAttempts: 5
+  retryPeriod: 2000

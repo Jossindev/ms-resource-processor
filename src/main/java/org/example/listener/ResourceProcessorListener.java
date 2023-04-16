@@ -1,6 +1,7 @@
 package org.example.listener;
 
-import org.example.service.ResourceService;
+import org.example.service.ResourceFacade;
+import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +13,17 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ResourceProcessorListener {
 
-    private final ResourceService resourceService;
+    private final ResourceFacade resourceService;
 
     @RabbitListener(queues = "${queue.processing-queue}")
     public void listenMessage(int resourceId) {
-        log.info("Received message: {} ", resourceId);
+        log.info("Received message. ResourceId = {}", resourceId);
         try {
-            resourceService.process(resourceId);
+            Integer songId = resourceService.process(resourceId);
+            log.info("Processing message with songId = {} finished successfully!", songId);
         } catch (final Exception ex) {
-            log.error("Processing message {} with error: {}", resourceId, ex);
+            log.error("Processing message {} with error: ", resourceId, ex);
+            throw new AmqpRejectAndDontRequeueException(ex);
         }
     }
 }
