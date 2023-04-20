@@ -6,6 +6,22 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 server:
   port : 8081
+
+queue:
+  processing-queue: PROCESSING_QUEUE
+
+service:
+  resource.endpoint: http://localhost:8080
+  song.endpoint: http://localhost:8082
+
+feign:
+  retryAttempts: 5
+  retryPeriod: 2000
