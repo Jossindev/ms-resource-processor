@@ -12,6 +12,9 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
 }
 
 repositories {
@@ -37,7 +40,9 @@ dependencies {
     implementation group: 'org.apache.tika', name: 'tika-parsers', version: '1.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'io.cucumber:cucumber-java:6.11.0'
+    testImplementation 'io.cucumber:cucumber-junit:6.11.0'
+    testImplementation 'io.cucumber:cucumber-spring:6.11.0'
 
 
     //    implementation 'org.springframework.cloud:spring-cloud-starter'
