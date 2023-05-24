@@ -19,8 +19,8 @@ queue:
   processing-queue: PROCESSING_QUEUE
 
 service:
-  resource.endpoint: http://localhost:8080
-  song.endpoint: http://localhost:8082
+  resource.endpoint: http://ms-resource-app:8080
+  song.endpoint: http://ms-song-app:8082
 
 feign:
   retryAttempts: 5

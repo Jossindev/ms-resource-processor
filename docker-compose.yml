@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  ms-resource-processor-app:
+    image: ms-resource-processor
+    ports:
+      - "127.0.0.1:8081:8081"
+    environment:
+      SPRING_RABBITMQ_HOST: rabbit
+      SPRING_RABBITMQ_PORT: 5672
+    networks:
+      - rabbit_network
+      - microservices_network
+
+networks:
+  rabbit_network:
+    external: true
+  microservices_network:
+    external: true
