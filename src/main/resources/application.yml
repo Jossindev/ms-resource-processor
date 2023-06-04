@@ -11,6 +11,8 @@ spring:
     port: 5672
     username: guest
     password: guest
+  application:
+    name: resource-processor
 
 server:
   port : 8081
@@ -25,3 +27,6 @@ service:
 feign:
   retryAttempts: 5
   retryPeriod: 2000
+
+eureka:
+  client.serviceUrl.defaultZone: http://localhost:8761/eureka/
