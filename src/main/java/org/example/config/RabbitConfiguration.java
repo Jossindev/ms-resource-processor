@@ -13,11 +13,19 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfiguration {
 
     @Value("${queue.processing-queue}")
-    private String queueName;
+    private String processingQueue;
+
+    @Value("${queue.success-queue}")
+    private String successQueue;
 
     @Bean
     public Queue processingQueue() {
-        return new Queue(queueName, true, false, false);
+        return new Queue(processingQueue, true, false, false);
+    }
+
+    @Bean
+    public Queue successQueue() {
+        return new Queue(successQueue, true, false, false);
     }
 
     @Bean
@@ -36,6 +44,7 @@ public class RabbitConfiguration {
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
         RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
         rabbitAdmin.declareQueue(processingQueue());
+        rabbitAdmin.declareQueue(successQueue());
         return rabbitAdmin;
     }
 }
