@@ -19,6 +19,7 @@ server:
 
 queue:
   processing-queue: PROCESSING_QUEUE
+  success-queue: SUCCESS_QUEUE
 
 service:
   resource.endpoint: http://api-gateway:8090/resource-service
